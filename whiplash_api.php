@@ -39,7 +39,6 @@ class WhiplashApi
         // the $path sometimes has the "?" character included.  this is part of the Whiplash API
         // if the path includes "?" character and there are $params then this function will need to be updated
         // for more robust construction of the $json_url
-        
         // for now this prevents the ? from being added twice
         if ($query_params) {
             $json_url .= '?' . $query_params;
@@ -57,7 +56,7 @@ class WhiplashApi
         $ch = $this->connection;
         curl_setopt($ch, CURLOPT_URL, $json_url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
-      curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($params));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($params));
         $result =  curl_exec($ch); // Getting jSON result string
         $out = json_decode($result); // Decode the result
         return $out;
@@ -68,7 +67,7 @@ class WhiplashApi
         $ch = $this->connection;
         curl_setopt($ch, CURLOPT_URL, $json_url);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'PUT');
-      curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($params));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($params));
         $result =  curl_exec($ch); // Getting jSON result string
         $out = json_decode($result); // Decode the result
         return $out;
@@ -89,6 +88,10 @@ class WhiplashApi
         return $this->get('items', $params);
     }
     
+    public function get_item_count($params=array()) {
+        return $this->get('items/count', $params);
+    }
+
     public function get_item($id) {
         return $this->get('items/'.$id);
     }
